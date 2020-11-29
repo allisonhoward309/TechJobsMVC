@@ -9,7 +9,7 @@
             @foreach (var column in ViewBag.columns)
             {
                 <span>
-                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@column.Key == 'all'" />
+                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked ="@column.Key=='location'" />
                     <label for="@column.Key">@column.Value</label>
                 </span>
             }
@@ -28,6 +28,45 @@
 
     @{
         //TODO #4: Loop over the search results to display all job fields.
+    }
+    @if (ViewBag.jobs != null)
+    {
+        <table class="job-listing">
+            <tr>
+                @foreach (var column in ViewBag.columns)
+                {
+                    @if (column.Value == "All")
+                    {
+                        <th>ID</th>
+                    }
+                    else
+                    {
+                        <th>@column.Value</th>
+                    }
+                }
+            </tr>
+            @foreach (Job job in ViewBag.jobs)
+            {
+                <tr>
+                    <td>
+                        @job.Id
+                    </td>
+                    <td>
+                        @job.Employer
+                    </td>
+                    <td>
+                        @job.Location
+                    </td>
+                    <td>
+                        @job.PositionType
+                    </td>
+                    <td>
+                        @job.CoreCompetency
+                    </td>
+                </tr>
+            }
+
+        </table>
     }
 
 </div>
